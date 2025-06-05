@@ -5,6 +5,7 @@ const settingsBtn = document.getElementById('settings-btn');
 const musicBtn = document.getElementById('music-btn');
 const chillAudio = document.getElementById('chill-audio');
 const ringProgress = document.querySelector('.ring-progress');
+const centerPlayPauseBtn = document.getElementById('center-play-pause');
 
 // Default durations (in seconds)
 let workDuration = parseInt(localStorage.getItem('workDuration')) || 1500; // 25 min
@@ -44,10 +45,17 @@ function notify(msg) {
   }
 }
 
+function setPlayPauseIcon() {
+  centerPlayPauseBtn.innerHTML = running
+    ? `<svg viewBox="0 0 32 32"><rect x="7" y="6" width="6" height="20" rx="2"/><rect x="19" y="6" width="6" height="20" rx="2"/></svg>`
+    : `<svg viewBox="0 0 32 32"><polygon points="8,6 26,16 8,26"/></svg>`;
+  startBtn.textContent = running ? 'Pause' : 'Start';
+}
+
 function startTimer() {
   if (running) return;
   running = true;
-  startBtn.textContent = 'Pause';
+  setPlayPauseIcon();
   timer = setInterval(() => {
     if (timeLeft > 0) {
       timeLeft--;
@@ -56,6 +64,7 @@ function startTimer() {
     } else {
       clearInterval(timer);
       running = false;
+      setPlayPauseIcon();
       playChime();
       if (isWork) {
         notify('Work session complete! Time for a break.');
@@ -75,7 +84,7 @@ function startTimer() {
 
 function pauseTimer() {
   running = false;
-  startBtn.textContent = 'Start';
+  setPlayPauseIcon();
   clearInterval(timer);
 }
 
@@ -121,4 +130,13 @@ if ("Notification" in window && Notification.permission !== "granted") {
 
 // Initial render
 updateDisplay();
-updateRing(); 
+updateRing();
+setPlayPauseIcon();
+
+centerPlayPauseBtn.addEventListener('click', () => {
+  if (running) {
+    pauseTimer();
+  } else {
+    startTimer();
+  }
+}); 

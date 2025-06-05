@@ -103,4 +103,33 @@ button:hover {
     font-size: 1rem;
     padding: 0.6rem 1.2rem;
   }
+}
+#center-play-pause {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  outline: none;
+  padding: 0;
+  transition: filter 0.2s, transform 0.2s;
+}
+#center-play-pause:hover svg {
+  filter: brightness(0.7);
+  transform: scale(1.08);
+}
+#center-play-pause svg {
+  width: 48px;
+  height: 48px;
+  fill: #234;
+  transition: filter 0.2s, transform 0.2s;
 } 

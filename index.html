@@ -10,10 +10,13 @@
   <div class="background-vibe"></div>
   <div class="timer-card">
     <h1>Vibe Timer</h1>
-    <svg class="timer-ring" width="220" height="220">
-      <circle class="ring-bg" cx="110" cy="110" r="100" />
-      <circle class="ring-progress" cx="110" cy="110" r="100" />
-    </svg>
+    <div class="timer-ring-container" style="position: relative; width: 220px; height: 220px;">
+      <svg class="timer-ring" width="220" height="220">
+        <circle class="ring-bg" cx="110" cy="110" r="100" />
+        <circle class="ring-progress" cx="110" cy="110" r="100" />
+      </svg>
+      <button id="center-play-pause" aria-label="Play/Pause Timer"></button>
+    </div>
     <div class="timer-display" id="timer-display">25:00</div>
     <div class="button-row">
       <button id="start-btn">Start</button>
