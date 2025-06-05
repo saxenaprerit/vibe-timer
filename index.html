@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vibe Timer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="background-vibe"></div>
+  <div class="timer-card">
+    <h1>Vibe Timer</h1>
+    <svg class="timer-ring" width="220" height="220">
+      <circle class="ring-bg" cx="110" cy="110" r="100" />
+      <circle class="ring-progress" cx="110" cy="110" r="100" />
+    </svg>
+    <div class="timer-display" id="timer-display">25:00</div>
+    <div class="button-row">
+      <button id="start-btn">Start</button>
+      <button id="settings-btn">Settings</button>
+      <button id="music-btn">Chill Beats</button>
+    </div>
+  </div>
+  <audio id="chill-audio" loop>
+    <source src="assets/chill-beats.mp3" type="audio/mpeg">
+  </audio>
+  <script src="app.js"></script>
+</body>
+</html> 

@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  font-family: 'Inter', Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e0ecef;
+  overflow: hidden;
+}
+.background-vibe {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  background: linear-gradient(270deg, #b7e0f7, #b9f7d1, #f7e0b7, #f7b7d1, #b7c7f7);
+  background-size: 400% 400%;
+  animation: gradientMove 18s ease-in-out infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  25% { background-position: 50% 100%; }
+  50% { background-position: 100% 50%; }
+  75% { background-position: 50% 0%; }
+  100% { background-position: 0% 50%; }
+}
+.timer-card {
+  position: relative;
+  z-index: 1;
+  background: rgba(255,255,255,0.7);
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  border-radius: 24px;
+  padding: 2.5rem 2.5rem 2rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 340px;
+  max-width: 90vw;
+  backdrop-filter: blur(12px);
+}
+.timer-card h1 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #234;
+}
+.timer-ring {
+  margin-bottom: 1.2rem;
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: #e0e0e0;
+  stroke-width: 14;
+}
+.ring-progress {
+  fill: none;
+  stroke: #4ecca3;
+  stroke-width: 14;
+  stroke-linecap: round;
+  stroke-dasharray: 628.32;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 0.5s linear;
+}
+.timer-display {
+  font-size: 4rem;
+  font-weight: 600;
+  color: #234;
+  margin-bottom: 1.5rem;
+  letter-spacing: 2px;
+  text-align: center;
+}
+.button-row {
+  display: flex;
+  gap: 1.2rem;
+}
+button {
+  padding: 0.7rem 2.1rem;
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.8);
+  box-shadow: 0 2px 8px rgba(31,38,135,0.08);
+  color: #234;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+button:hover {
+  background: #e0ecef;
+  box-shadow: 0 4px 16px rgba(31,38,135,0.12);
+}
+@media (max-width: 600px) {
+  .timer-card {
+    min-width: 90vw;
+    padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  }
+  .timer-display {
+    font-size: 2.5rem;
+  }
+  .button-row button {
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
+} 
