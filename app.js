@@ -21,6 +21,31 @@ const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 ringProgress.style.strokeDasharray = `${CIRCUMFERENCE}`;
 ringProgress.style.strokeDashoffset = 0;
 
+let chillPlaylist = [];
+let currentTrack = 0;
+
+async function loadPlaylist() {
+  try {
+    // Try to fetch a directory listing (works if server provides it as JSON)
+    const resp = await fetch('assets/playlist.json');
+    if (resp.ok) {
+      const files = await resp.json();
+      chillPlaylist = files.filter(f => f.endsWith('.mp3')).map(f => 'assets/' + f);
+    } else {
+      // fallback to static
+      chillPlaylist = [
+        'assets/song1_texas_hold_em.mp3',
+        'assets/song2_push_2_start.mp3'
+      ];
+    }
+  } catch {
+    chillPlaylist = [
+      'assets/song1_texas_hold_em.mp3',
+      'assets/song2_push_2_start.mp3'
+    ];
+  }
+}
+
 function updateDisplay() {
   const min = Math.floor(timeLeft / 60).toString().padStart(2, '0');
   const sec = (timeLeft % 60).toString().padStart(2, '0');
@@ -88,6 +113,19 @@ function pauseTimer() {
   clearInterval(timer);
 }
 
+function playCurrentTrack() {
+  if (!chillPlaylist.length) return;
+  chillAudio.src = chillPlaylist[currentTrack];
+  chillAudio.play();
+  musicBtn.textContent = 'Pause Beats';
+}
+
+chillAudio.addEventListener('ended', () => {
+  if (!chillPlaylist.length) return;
+  currentTrack = (currentTrack + 1) % chillPlaylist.length;
+  playCurrentTrack();
+});
+
 startBtn.addEventListener('click', () => {
   if (running) {
     pauseTimer();
@@ -97,9 +135,9 @@ startBtn.addEventListener('click', () => {
 });
 
 musicBtn.addEventListener('click', () => {
+  if (!chillPlaylist.length) return;
   if (chillAudio.paused) {
-    chillAudio.play();
-    musicBtn.textContent = 'Pause Beats';
+    playCurrentTrack();
   } else {
     chillAudio.pause();
     musicBtn.textContent = 'Chill Beats';
@@ -139,4 +177,6 @@ centerPlayPauseBtn.addEventListener('click', () => {
   } else {
     startTimer();
   }
-}); 
+});
+
+loadPlaylist(); 
